@@ -1,0 +1,66 @@
+<%- include('partials/headerPartials.ejs') %>
+<div>
+	<!-- Container 1 -->
+	<div class="container">
+		<div class="row">
+			<div class="col-12 mt-3">
+				<h2 class="alert alert-info text-center rounded-start shadow">URL Shortener NodeJS</h2>
+			</div>
+		</div>
+	</div>
+	<!-- Container 2 -->
+	<div class="container">
+		<div class="row d-flex align-items-center justify-content-center">
+			<div class="col-6 shadow rounded">
+				<h3 class="alert alert-warning text-center rounded-start shadow mt-3">Input Section</h3>
+
+				<form action="/" method="post">
+					<label for="longURL" class="form-label">Enter URL</label>
+					<input type="text" class="form-control" name="longURL" id="longURL" placeholder="Enter URL Here" />
+					<!-- <br> -->
+					<button type="submit" class="btn btn-primary my-3">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Container 3 -->
+	<div class="container mt-4">
+		<div class="row d-flex align-items-center justify-content-center">
+			<div class="col shadow rounded">
+				<h3 class="alert alert-danger text-center rounded-start shadow my-3">History Section</h3>
+
+				<table class="table table-striped table-hover text-center">
+					<thead>
+						<tr>
+							<th scope="col">No</th>
+							<th scope="col">Long URL</th>
+							<th scope="col">Short URL</th>
+							<th scope="col">Clicks Count</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% var i=1 %> <% data.forEach((item)=>{%>
+						<tr>
+							<td><%= i++%></td>
+							<td><a href="<%= item.longURL%>"><%= item.longURL%></a></td>
+							<td><a href="<%= item.shortURL%>"><%= item.shortURL%></a></td>
+							<td><%= item.clicksCount%></td>
+							<td>
+								<div>
+									<form action="/delete/<%= item._id%>" method="get">
+										<button class="btn">
+											<i class="fa-solid fa-trash"></i>
+										</button>
+									</form>
+								</div>
+							</td>
+						</tr>
+						<%})%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<%- include('partials/footerPartials.ejs') %>
